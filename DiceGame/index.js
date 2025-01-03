@@ -16,10 +16,10 @@ document.addEventListener("DOMContentLoaded", () => {
   const heading = document.querySelector("h1"); // Select the first <h1> element
   var outcome= "Its a tie!"
   if (player1 > player2){
-    outcome= "Player 1 wins!"
+    outcome= "Player 1 wins"
   }
   else if (player1< player2){
-    outcome= "Player 2 wins!"
+    outcome= "Player 2 wins"
   }
   heading.textContent = outcome; // Change the text content of the <h1>
 });
