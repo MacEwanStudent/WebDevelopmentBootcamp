@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Name Letters</title>
+</head>
+
+<body>
+  <%if (locals.numOfLetters){ %>
+    <h1>There are <%= numOfLetters %> in yout name</h1>
+  <%} else {%>
+  <!-- Write your code here -->
+   <h1>Write your name below</h1>
+  <% } %>
+  <form action="/submit" method="POST">
+    <input type="text" name="fName" placeholder="First name">
+    <input type="text" name="lName" placeholder="Last name">
+    <input type="submit" value="OK">
+  </form>
+</body>
+
+</html>

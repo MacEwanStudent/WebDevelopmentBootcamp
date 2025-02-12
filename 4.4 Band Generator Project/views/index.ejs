@@ -1,3 +1,4 @@
+<%- include("partials/header.ejs") %>
 <!-- Step 3 Add Header -->
 
 
@@ -5,8 +6,11 @@
     Change the h1 to show the adjective and noun.
     But when the user first goes on the website and there is no adjective and noun, 
     Show the default h1 below -->
-
-<form action="/submit" method="POST">
+<% if (locals.rAdj) { %>
+<h1> your band name is <%= rAdj %></h1>
+<% } %>
+<form action="/" method="POST">
   <input type="submit" value="Generate Name">
 </form>
 <!-- Step 3 Add Footer -->
+<%- include("partials/footer.ejs") %>
