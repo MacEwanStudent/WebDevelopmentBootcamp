@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recipe Book</title>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+    <div class="container">
+        <H1>Recipes</H1>
+        <div class="cookbooks">
+            <% recipes.forEach((recipe, index) => { %>
+                <button class="cookbook" data-index="<%= index %>">
+                    <%= recipe.emoji %>
+                </button>
+            <% }) %>
+        </div>
+
+        <div class="scroll-box">
+            <p id="ingredients">Click on a Taco to see ingredients</p>
+        </div>
+    </div>
+
+    <script type="module" src="/script.js"></script>
+</body>
+</html>
