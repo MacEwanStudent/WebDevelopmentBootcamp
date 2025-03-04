@@ -9,19 +9,45 @@
 <body>
     <div class="container">
         <H1>Recipes</H1>
-        <div class="cookbooks">
-            <% recipes.forEach((recipe, index) => { %>
-                <button class="cookbook" data-index="<%= index %>">
-                    <%= recipe.emoji %>
-                </button>
-            <% }) %>
-        </div>
-
+            <form action="/recipe" method="post">
+                <div class="cookbooks">
+                    <% init_button.forEach((recipe, index) => { %>
+                        <button class="cookbook" type="submit" value="<%= index %>" name="choice" data-index="<%= index %>">
+                            <%= recipe.emoji %>
+                        </button>
+                    <% }) %>
+                </div>
+            </form>
+         
         <div class="scroll-box">
-            <p id="ingredients">Click on a Taco to see ingredients</p>
+            <% if (typeof recipes !== "undefined" && recipes !== null) { %>
+                <h2><%= recipes.name %> Recipe</h2>
+                <p>Preparation : <%= recipes.ingredients.protein.preparation %> </p>
+                <h2>Toppings</h2>
+                <table border="1">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Quantity</th>
+                            <th>Ingredients</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% recipes.ingredients.toppings.forEach(ingredient => { %>
+                            <tr>
+                                <td><%= ingredient.name %></td>
+                                <td><%= ingredient.quantity %></td>
+                                <td><%= ingredient.ingredients.join(", ") %></td>
+                            </tr>
+                        <% }) %>
+                    </tbody>
+                </table>
+            <% } else { %>
+                <p>Click on a recipe to see the ingredients</p>
+            <% } %>       
         </div>
+        
     </div>
 
-    <script type="module" src="/script.js"></script>
 </body>
 </html>

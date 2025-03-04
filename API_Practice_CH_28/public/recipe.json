@@ -4,7 +4,7 @@
     "type": "taco",
     "name": "Chicken Taco",
     "price": 2.99,
-    "emoji": "🐓",
+    "emoji": "🐔",
     "ingredients": {
       "protein": {
         "name": "Chicken",
@@ -42,7 +42,7 @@
     "id": "0002",
     "type": "taco",
     "name": "Beef Taco",
-    "emoji":"🐮",
+    "emoji":"🥩",
     "price": 3.49,
     "ingredients": {
       "protein": {

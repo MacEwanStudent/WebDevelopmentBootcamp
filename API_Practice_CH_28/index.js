@@ -1,133 +1,49 @@
 import express from "express";
 import bodyParser from "body-parser";
-
+import fs from "fs";
 
 const app = express();
 const port = 3000;
 
 app.set("view engine", "ejs");
 app.use(express.static("public"));
+app.use(bodyParser.urlencoded({ extended: true }));
 
+let recipes= null;
+let init_buttons = {};
+let data;
+let choice;
 
-const recipes = [
-  {
-    "id": "0001",
-    "type": "taco",
-    "name": "Chicken Taco",
-    "price": 2.99,
-    "emoji": "🐓",
-    "ingredients": {
-      "protein": {
-        "name": "Chicken",
-        "preparation": "Grilled"
-      },
-      "salsa": {
-        "name": "Tomato Salsa",
-        "spiciness": "Medium"
-      },
-      "toppings": [
-        {
-          "name": "Lettuce",
-          "quantity": "1 cup",
-          "ingredients": ["Iceberg Lettuce"]
-        },
-        {
-          "name": "Cheese",
-          "quantity": "1/2 cup",
-          "ingredients": ["Cheddar Cheese", "Monterey Jack Cheese"]
-        },
-        {
-          "name": "Guacamole",
-          "quantity": "2 tablespoons",
-          "ingredients": ["Avocado", "Lime Juice", "Salt", "Onion", "Cilantro"]
-        },
-        {
-          "name": "Sour Cream",
-          "quantity": "2 tablespoons",
-          "ingredients": ["Sour Cream"]
-        }
-      ]
-    }
-  },
-  {
-    "id": "0002",
-    "type": "taco",
-    "name": "Beef Taco",
-    "emoji":"🐮",
-    "price": 3.49,
-    "ingredients": {
-      "protein": {
-        "name": "Beef",
-        "preparation": "Seasoned and Grilled"
-      },
-      "salsa": {
-        "name": "Salsa Verde",
-        "spiciness": "Hot"
-      },
-      "toppings": [
-        {
-          "name": "Onions",
-          "quantity": "1/4 cup",
-          "ingredients": ["White Onion", "Red Onion"]
-        },
-        {
-          "name": "Cilantro",
-          "quantity": "2 tablespoons",
-          "ingredients": ["Fresh Cilantro"]
-        },
-        {
-          "name": "Queso Fresco",
-          "quantity": "1/4 cup",
-          "ingredients": ["Queso Fresco"]
-        }
-      ]
-    }
-  },
-  {
-    "id": "0003",
-    "type": "taco",
-    "name": "Fish Taco",
-    "price": 4.99,
-    "emoji":"🐟",
-    "ingredients": {
-      "protein": {
-        "name": "Fish",
-        "preparation": "Battered and Fried"
-      },
-      "salsa": {
-        "name": "Chipotle Mayo",
-        "spiciness": "Mild"
-      },
-      "toppings": [
-        {
-          "name": "Cabbage Slaw",
-          "quantity": "1 cup",
-          "ingredients": [
-            "Shredded Cabbage",
-            "Carrot",
-            "Mayonnaise",
-            "Lime Juice",
-            "Salt"
-          ]
-        },
-        {
-          "name": "Pico de Gallo",
-          "quantity": "1/2 cup",
-          "ingredients": ["Tomato", "Onion", "Cilantro", "Lime Juice", "Salt"]
-        },
-        {
-          "name": "Lime Crema",
-          "quantity": "2 tablespoons",
-          "ingredients": ["Sour Cream", "Lime Juice", "Salt"]
-        }
-      ]
-    }
+// Function to load JSON data
+const loadRecipes = () => {
+  try {
+    const json_data = fs.readFileSync("./public/recipe.json", "utf8");
+    data = JSON.parse(json_data);
+    console.log(data)
+
+    if (!Array.isArray(data)) {
+      throw new Error("Invalid format: recipes must be an array");
   }
-]
+  } catch (error) {
+    console.error("Error loading recipes:", error);
+    data =[];
+  }
+};
+
+// Load recipes when the server starts
+loadRecipes();
 
 
 app.get("/", (req, res) => {
-  res.render("index", { recipes });
+  res.render("index", { init_button : data, recipes : recipes  });
+});
+
+app.post("/recipe", (req, res) => {
+  const choice= parseInt(req.body.choice);
+  recipes= data[choice];
+  console.log(data[choice]);
+  res.redirect("/");
+
 });
 
 app.listen(port, () => {
