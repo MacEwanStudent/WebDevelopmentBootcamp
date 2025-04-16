@@ -1,0 +1,44 @@
+<h1>🌍 Capital City Quiz</h1>
+<div class="game-container">
+  <div class="score">
+    Score: <%= typeof totalScore !== 'undefined' ? totalScore : 0 %>
+  </div>
+  <div class="lives">
+    Lives: <%= typeof currentLives !== 'undefined' ? currentLives : 0 %>
+  </div>
+
+  <% if (typeof question !== 'undefined') { %>
+  <h2>
+    Country: <%= question.country %> <% if (helperMode) { %>
+    <span class="helper">→ <%= question.capital %></span>
+    <% } %>
+  </h2>
+
+  <form method="POST" action="/submit">
+    <input type="hidden" name="country" value="<%= question.country %>" />
+
+    <label for="answer">What is the capital?</label>
+    <input
+      type="text"
+      id="answer"
+      name="answer"
+      placeholder="Type your answer..."
+      required
+    />
+
+    <label>
+      <input type="checkbox" name="helperMode" <%= helperMode ? "checked" : ""
+      %>> Enable Helper/Study Mode
+    </label>
+
+    <button type="submit">Submit</button>
+  </form>
+
+  <% if (typeof wasCorrect !== 'undefined') { %>
+  <p>
+    <strong><%= wasCorrect ? "✅ Correct!" : "❌ Incorrect!" %></strong>
+  </p>
+  <% } %> <% } else { %>
+  <p>No question loaded.</p>
+  <% } %>
+</div>

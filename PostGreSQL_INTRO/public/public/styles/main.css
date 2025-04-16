@@ -1,0 +1,94 @@
+/* public/styles/main.css */
+
+html, body {
+    height: 100%;
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    display: flex;
+    flex-direction: column;
+    background: linear-gradient(120deg, #89f7fe 0%, #66a6ff 100%);
+    color: #333;
+  }
+  
+  .content {
+    flex: 1;
+    padding: 40px;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  
+  form {
+    margin-top: 20px;
+  }
+  
+  input[type="text"],
+  input[type="number"] {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    margin: 10px 0 20px 0;
+  }
+  
+  button {
+    background: #66a6ff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 6px;
+    cursor: pointer;
+  }
+  
+  button:hover {
+    background: #5c9ded;
+  }
+  
+  label {
+    font-weight: bold;
+  }
+  
+  footer {
+    text-align: center;
+    padding: 10px;
+    color: #555;
+    margin-top: auto;
+  }
+  
+  .helper {
+    color: green;
+    font-style: italic;
+  }
+  
+  .score {
+    text-align: right;
+    font-weight: bold;
+  }
+
+  /* 🌞 Light Theme (default) handled by base styles */
+
+/* 🌚 Dark Theme */
+.dark-theme {
+  background: linear-gradient(to right, #232526, #414345);
+  color: #eee;
+}
+
+.dark-theme input,
+.dark-theme button {
+  background-color: #333;
+  color: #eee;
+  border: 1px solid #666;
+}
+
+.dark-theme input[type="checkbox"] {
+  accent-color: #66a6ff;
+}
+
+.dark-theme button:hover {
+  background-color: #444;
+}
+
+.dark-theme footer {
+  color: #aaa;
+}
+
+  
